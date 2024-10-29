@@ -14,4 +14,4 @@ RUN go build -o /godocker ./src/main.go
 
 EXPOSE 8080
 
-CMD [ “/godocker” ]
+CMD [ “/godocker” ] 

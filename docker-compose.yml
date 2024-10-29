@@ -7,7 +7,14 @@ services:
       - "8080:8080"
     environment:
       - HTTP_PORT=8080
-      - DB_HOST=Hello
-      - DB_USER=Hello
-      - DB_PASSWORD=Hello
-      - DB_NAME=Hello
+      - DB_HOST=localhost
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      - DB_NAME=vnpay
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=vnpay
+    ports:
+    - '3306:3306'
