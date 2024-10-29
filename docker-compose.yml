@@ -1,20 +1,50 @@
 version: '3.8'
 
 services:
-  app:
-    build: .
-    ports:
-      - "8080:8080"
-    environment:
-      - HTTP_PORT=8080
-      - DB_HOST=localhost
-      - DB_USER=root
-      - DB_PASSWORD=rootpassword
-      - DB_NAME=vnpay
   mysql:
     image: mysql:8.0
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
       - MYSQL_DATABASE=vnpay
     ports:
-    - '3306:3306'
+      - '3306:3306'
+    networks:
+      - mynetwork 
+    healthcheck:
+      test: 
+        [
+            'CMD',
+            'mysqladmin',
+            'ping',
+            '-h',
+            'localhost',
+            '-u',
+            'root',
+            '-p', 'rootpassword'  # Chỉnh sửa phần này để tách password ra khỏi câu lệnh
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  app:
+    image: vnpay
+    build:
+      context: ./
+    ports:
+      - "8080:8080"
+    environment:
+      - HTTP_PORT=8080
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      - DB_NAME=vnpay
+    depends_on:
+      mysql:  # Sử dụng chỉ tên dịch vụ mysql mà không có dấu `:`
+        condition: service_healthy  # Đảm bảo dịch vụ mysql phải khỏe mạnh trước khi bắt đầu dịch vụ app
+
+    networks:
+      - mynetwork
+    
+networks:
+  mynetwork: 
+    driver: bridge
