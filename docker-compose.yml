@@ -38,6 +38,7 @@ services:
       - DB_USER=root
       - DB_PASSWORD=rootpassword
       - DB_NAME=vnpay
+      - DB_PORT=3306
     depends_on:
       mysql:
         condition: service_healthy  # Đảm bảo dịch vụ mysql phải khỏe mạnh trước khi bắt đầu dịch vụ app

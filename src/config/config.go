@@ -14,6 +14,11 @@ type Config struct {
 	DbName     string
 	JwtSecret  string
 	DbPort     string
+	OraclePwd  string
+	OracleDb   string
+	OracleHost string
+	OraclePort string
+	OracleUser string
 }
 
 func LoadConfig() (*Config, error) {
@@ -29,6 +34,11 @@ func LoadConfig() (*Config, error) {
 		DbPassword: os.Getenv("DB_PASSWORD"),
 		JwtSecret:  os.Getenv("JWT_SECRET"),
 		DbPort:     os.Getenv("DB_PORT"),
+		OraclePwd:  os.Getenv("ORACLE_PASSWORD"),
+		OracleHost: os.Getenv("ORACLE_HOST"),
+		OracleDb:   os.Getenv("ORACLE_DATABASE"),
+		OracleUser: os.Getenv("ORACLE_USERNAME"),
+		OraclePort: os.Getenv("ORACLE_PORT"),
 	}
 	return config, nil
 }
