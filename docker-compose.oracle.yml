@@ -6,7 +6,7 @@ services:
       ORACLE_ALLOW_REMOTE: "true"  
       # ORACLE_USERNAME: "system"      
       ORACLE_PASSWORD: "oracle"      # Mật khẩu
-      ORACLE_DATABASE: "ORCL"        
+      ORACLE_DATABASE: "VNPAY"        
     ports:
       - '1521:1521'  # Cổng mặc định của Oracle
     networks:

@@ -1,9 +1,6 @@
 package config
 
 import (
-	"log"
-	"strconv"
-
 	oracle "github.com/godoes/gorm-oracle"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
@@ -16,11 +13,11 @@ func LoadOracleConfig(cfg *Config) (*gorm.DB, error) {
 		"TERRITORY":          "CHINA",
 		"SSL":                "false",
 	}
-	port, err := strconv.Atoi(cfg.OraclePort) // Sử dụng strconv.Atoi để chuyển đổi
-	if err != nil {
-		log.Fatalf("Error converting DbPort: %v", err)
-	}
-	url := oracle.BuildUrl(cfg.OracleHost, port, cfg.OracleDb, cfg.OracleUser, cfg.OraclePwd, options)
+	// port, err := strconv.Atoi(cfg.OraclePort) // Sử dụng strconv.Atoi để chuyển đổi
+	// if err != nil {
+	// 	log.Fatalf("Error converting DbPort: %v", err)
+	// }
+	url := oracle.BuildUrl("localhost", 1521, "VNPAY", "system", "oracle", options)
 
 	dialector := oracle.New(oracle.Config{
 		DSN:                     url,
