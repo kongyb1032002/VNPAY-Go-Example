@@ -32,14 +32,19 @@ services:
       - "8080:8080"
     environment:
       - HTTP_PORT=8080
-      - DB_HOST=oracle  # Chỉnh sửa nếu bạn muốn sử dụng Oracle
-      - DB_USER=root    # Chỉnh sửa nếu bạn muốn sử dụng Oracle
+      - DB_HOST=mysql
+      - DB_USER=root 
       - DB_PORT=1521
-      - DB_PASSWORD=rootpassword  # Chỉnh sửa nếu bạn muốn sử dụng Oracle
-      - DB_NAME=vnpay  # Chỉnh sửa nếu bạn muốn sử dụng Oracle
+      - DB_PASSWORD=rootpassword  
+      - DB_NAME=vnpay
+      - ORACLE_HOST=localhost
+      - ORACLE_PASSWORD=oracle
+      - ORACLE_DATABASE=vnpay
+      - ORACLE_USERNAME=system
+      - ORACLE_PORT=1521 
     depends_on:
       oracle:
-        condition: service_healthy  # Đảm bảo dịch vụ oracle phải khỏe mạnh trước khi bắt đầu dịch vụ app
+        condition: service_healthy 
     networks:
       - api-network
     

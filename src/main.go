@@ -17,15 +17,15 @@ func main() {
 		log.Fatalf("Error loading config: %v", err)
 	}
 
-	// db, err := config.LoadMysqlConfig(cfg)
-	// if err != nil {
-	// 	log.Fatalf("Error loading Mysql: %v", err)
-	// }
-
-	db, err := config.LoadOracleConfig(cfg)
+	db, err := config.LoadMysqlConfig(cfg)
 	if err != nil {
-		log.Fatalf("Error loading database: %v", err)
+		log.Fatalf("Error loading Mysql: %v", err)
 	}
+
+	// db, err := config.LoadOracleConfig(cfg)
+	// if err != nil {
+	// 	log.Fatalf("Error loading database: %v", err)
+	// }
 
 	// Tự động tạo các bảng
 	err = db.AutoMigrate(&model.User{}, &model.Role{}) // Thêm các model khác nếu cần
